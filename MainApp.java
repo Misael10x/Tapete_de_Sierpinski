@@ -19,3 +19,39 @@ public class MainApp extends JPanel {
         drawSierpinski(g, nivel_de_recursividad, 50, 50, 300, 300);
     }
 
+    private void drawSierpinski(Graphics g, int nivel, int x, int y, int width, int height) {
+        if (nivel == 0) {
+          
+            g.fillRect(x, y, width, height);
+        } else {
+         
+            int newWidth = width / 3;
+            int newHeight = height / 3;
+
+           
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 3; j++) {
+                   
+                    if (i == 1 && j == 1) {
+                        continue;
+                    }
+                   
+                    drawSierpinski(g, nivel - 1, x + i * newWidth, y + j * newHeight, newWidth, newHeight);
+                }
+            }
+        }
+    }
+
+   
+    public static void main(String[] args) {
+        
+        JFrame frame = new JFrame("Tapete de Sierpinski");
+        MainApp panel = new MainApp();
+
+        
+        frame.setSize(400, 400);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.add(panel); 
+        frame.setVisible(true); 
+    }
+}
